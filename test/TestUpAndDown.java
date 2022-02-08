@@ -3,10 +3,10 @@ import org.junit.jupiter.api.Test;
 
 import java.util.List;
 
-public class TestUpAndDown {
+class TestUpAndDown {
 
     @Test
-    public void testCompute() {
+    void computeWithGoodMaps() {
         String map1 =
                 "_|\n" +
                         "  ";
@@ -22,6 +22,21 @@ public class TestUpAndDown {
                         "  ";
         Assertions.assertEquals(List.of(Move.STAY), UpAndDown.compute(map3));
 
+    }
+
+    @Test
+    void computeWithWrongMap() {
+        String wrongMap1 = "A" + "  ";
+        Assertions.assertThrows(IllegalArgumentException.class,() -> UpAndDown.compute(wrongMap1));
+
+        String wrongMap2 = "_" + "  ";
+        Assertions.assertThrows(IllegalArgumentException.class,() -> UpAndDown.compute(wrongMap2));
+    }
+
+    @Test
+    void computeWithEmptyMap() {
+        String emptyMap = "";
+        Assertions.assertThrows(IllegalArgumentException.class,() -> UpAndDown.compute(emptyMap));
     }
 
 }
